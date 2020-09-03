@@ -1,19 +1,19 @@
 
 # Lumen Assorted micro services
 
-  
-
-
 
 Even though I'm most familiar with Yii2 I've decided to give a try at Laravel through Lumen.
 During developments I'm often confronted to common tasks, therefore I though I could create a Rest Api layer common to my projects. 
 
-As most of my backends are using PHP (Directus, wordpress, Yii2) I picked Lumen (thou Directus and WP are also able to perform that). 
+As most of my backends are using PHP (Directus, wordpress, Yii2) I picked Lumen (thou Tii2, Directus and WP are also able to perform that). 
 
-But I wanted the flexibility of a framework as with Yii2 with which I've been developing the most. 
+But I wanted to try Lumen instead of Yii2 with which I've been developing the most. 
 
 ## What is it ?
 It is a simple Lumen installation with added controllers and routes, so...no big deal here.
+
+## Installation
+Clone this repo and run composer update
 
 ## Endpoints
 

@@ -38,6 +38,9 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     // will return the vat rate of the located ip country address
     $router->get('vat/ipvatrate',  ['uses' => 'VatController@ipVatRate']);
 
+    // will return the distance between two addresses
+    $router->get('geo/distance',  ['uses' => 'GeoController@getDistance']);
+
     // default response whne no route is given
     $router->get('/', function () use ($router) {
         //return $router->app->version();
