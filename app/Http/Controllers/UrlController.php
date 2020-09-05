@@ -116,9 +116,9 @@ class UrlController extends Controller
         $url = $request->input('url');
 
 
-        $image = file_get_contents("https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url=$url&screenshot=true");
+        $image = file_get_contents("https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=$url");
         $image = json_decode($image, true);
-        $image = $image['screenshot']['data'];
+        $image = $image['loadingExperience']['screenshot-thumbnails']['details']['items'][2];
         $image = str_replace(array('_', '-'), array('/', '+'), $image);
         return 'data:image/jpeg;base64,' . $image;
     }
