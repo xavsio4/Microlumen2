@@ -118,9 +118,11 @@ class UrlController extends Controller
 
         $image = file_get_contents("https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=$url");
         $image = json_decode($image, true);
-        $image = $image['loadingExperience']['screenshot-thumbnails']['details']['items'][2];
-        $image = str_replace(array('_', '-'), array('/', '+'), $image);
-        return 'data:image/jpeg;base64,' . $image;
+        //$image = str_replace(array('_', '-'), array('/', '+'), $image);
+        //return 'data:image/jpeg;base64,' . $image; 
+        return $image['lighthouseResult']['audits']['final-screenshot']['details']['data'];
+
+        
     }
 
     /**
@@ -175,4 +177,24 @@ class UrlController extends Controller
             return response()->json(['valid' => false, 'msg' => 'Not a valid url'], 200);
         }
     }
+
+    private function imgToBase64($path) {
+		$type = pathinfo($path, PATHINFO_EXTENSION);
+		$data = @file_get_contents($path);
+			if($data === FALSE)
+			{
+				$url = $url = explode('/',$this->file);
+				array_pop($url);
+				$url = implode('/', $url); 
+				$data = @file_get_contents($url."/".$path);
+				if($data === FALSE)
+					return false;
+
+
+			}
+
+		$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+		return $base64;
+	}
+
 }
