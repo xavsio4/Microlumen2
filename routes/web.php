@@ -22,6 +22,9 @@ $router->get('/', function () use ($router) {
 $router->post('url/geturltest', ['uses' => 'UrlController@getUrlTest']);
 
 $router->group(['prefix' => 'v1'], function () use ($router) {
+
+   // will return the page meta data from an URL
+   $router->post('measure/create',  ['uses' => 'MeasureController@create']);
     
     // will return the page meta data from an URL
     $router->get('url/fetchmeta',  ['uses' => 'UrlController@fetchMeta']);
