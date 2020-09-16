@@ -102,6 +102,7 @@ $app->middleware([
 // $app->register(App\Providers\EventServiceProvider::class);
 //$app->register('Anam\PhantomMagick\ConverterServiceProvider');
 $app->register(\KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider::class);
+$app->register(Illuminate\Mail\MailServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -113,6 +114,19 @@ $app->register(\KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider:
 | can respond to, as well as the controllers that may handle them.
 |
 */
+
+/**
+ * Config for mailer
+ */
+$app->configure('mail');
+
+$app->alias('mail.manager', Illuminate\Mail\MailManager::class);
+$app->alias('mail.manager', Illuminate\Contracts\Mail\Factory::class);
+
+$app->alias('mailer', Illuminate\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
+/********************** end mailer config */
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',

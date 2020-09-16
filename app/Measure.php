@@ -13,7 +13,7 @@ class Measure extends Model
      * @var array
      */
     protected $fillable = [
-        'measure_type', 'measure_value'
+        'measure_type', 'measure_value','measure_unit'
     ];
 
    

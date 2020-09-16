@@ -1,6 +1,6 @@
 {
-    "name": "Fifteenpeas IT - apififteen",
-    "description": "A Lumen API for fifteenpeas SOA",
+    "name": "fifteenpeas/microservices",
+    "description": "A Lumen API for fifteenpeas microservices",
     "keywords": ["api", "soa", "Fifteenpeas"],
     "license": "MIT",
     "type": "project",
@@ -8,7 +8,11 @@
         "php": "^7.2.5",
         "google/apiclient": "^2.7",
         "guzzlehttp/guzzle": "^6.5",
-        "laravel/lumen-framework": "^7.0"
+        "illuminate/mail": "^7.0",
+        "kriswallsmith/buzz": "^1.1",
+        "laravel/lumen-framework": "^7.0",
+        "mailgun/mailgun-php": "^3.0",
+        "nyholm/psr7": "^1.3"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",

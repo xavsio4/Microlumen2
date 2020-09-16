@@ -19,11 +19,19 @@ $router->get('/', function () use ($router) {
 
 });
 
+//generate a key for Lumen
+$router->get('/key', function() {
+  return \Illuminate\Support\Str::random(32);
+});
+
 $router->post('url/geturltest', ['uses' => 'UrlController@getUrlTest']);
 
 $router->group(['prefix' => 'v1'], function () use ($router) {
 
-   // will return the page meta data from an URL
+  // will return the page meta data from an URL
+  $router->get('mail/mlsend',  ['uses' => 'MailController@SendMailgun']); 
+  
+  // will return the page meta data from an URL
    $router->post('measure/create',  ['uses' => 'MeasureController@create']);
     
     // will return the page meta data from an URL
