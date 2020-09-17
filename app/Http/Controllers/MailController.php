@@ -28,24 +28,27 @@ class MailController extends Controller
             'subject' => 'required',
             'content' => 'required'
         ]);
+        $data = [
+                'source'=> $request->input('source'),
+                'subject' => $request->input('subject'),
+                'content' => $request->input('content')
+            ]; 
 
         $domain = env('APP_DOMAIN', true);
         $sender = env('MAIL_FROM_ADDRESS', true);
         $receiver = env('MAIL_TO_ADDRESS', true);   
 
-    $data = [
-        'source'=> $request->input('source'),
-        'subject' => $request->input('subject'),
-        'content' => $request->input('content')
-    ];      
     try{
         $result = Mail::send(['html'=>'mail'], $data, function($message){
-        $message->from($sender, $sender);
+        $message->from(env('MAIL_FROM_ADDRESS', true), env('MAIL_FROM_ADDRESS', true));
         $message->to($receiver)->subject(' Registration Successful!');
         });
-       }catch(Exemption $e){echo $e->getMessage();} 
-       return $result;
-        
+       }
+       catch(Exemption $e){
+           return $e->getMessage();
+        } 
+       
+        return $result;
     }
 
     public function SendMailgun(request $request)
