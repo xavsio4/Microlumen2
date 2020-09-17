@@ -42,7 +42,7 @@ class MailController extends Controller
            
 
     try{
-        $result = Mail::send(['html'=>'mail'], $data, function($message){
+        Mail::send(['html'=>'mail'], $data, function($message){
         $message->from(env('MAIL_FROM_ADDRESS', true), env('MAIL_FROM_ADDRESS', true));
         $message->to(env('MAIL_TO_ADDRESS', true))->subject($data['subject']);
         });
@@ -51,7 +51,7 @@ class MailController extends Controller
            return $e->getMessage();
         } 
        
-        return $result;
+        return 'sent';
     }
 
     public function SendMailgun(request $request)
