@@ -28,20 +28,23 @@ class MailController extends Controller
             'subject' => 'required',
             'content' => 'required'
         ]);
+        
+        $domain = env('APP_DOMAIN', true);
+        
         $data = [
                 'source'=> $request->input('source'),
                 'subject' => $request->input('subject'),
-                'content' => $request->input('content')
+                'content' => $request->input('content'),
+                'sender' => env('MAIL_FROM_ADDRESS', true),
+                'receiver' => env('MAIL_TO_ADDRESS', true)
             ]; 
 
-        $domain = env('APP_DOMAIN', true);
-        $sender = env('MAIL_FROM_ADDRESS', true);
-        $receiver = env('MAIL_TO_ADDRESS', true);   
+           
 
     try{
         $result = Mail::send(['html'=>'mail'], $data, function($message){
         $message->from(env('MAIL_FROM_ADDRESS', true), env('MAIL_FROM_ADDRESS', true));
-        $message->to($receiver)->subject(' Registration Successful!');
+        $message->to(env('MAIL_TO_ADDRESS', true))->subject($data['subject']);
         });
        }
        catch(Exemption $e){
