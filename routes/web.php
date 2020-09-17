@@ -30,6 +30,9 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
   // will return the page meta data from an URL
   $router->get('mail/mlsend',  ['uses' => 'MailController@SendMailgun']); 
+
+  // will return the page meta data from an URL
+  $router->get('mail/smt',  ['uses' => 'MailController@SendMailSmtp']); 
   
   // will return the page meta data from an URL
    $router->post('measure/create',  ['uses' => 'MeasureController@create']);

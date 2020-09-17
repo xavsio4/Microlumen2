@@ -22,7 +22,7 @@ class GeoController extends Controller
      */
     public function getDistance(request $request)
     {
-        define('GOOGLE_API', env('GOOGLE_API'));
+        $google_api =  env('GOOGLE_API'));
         $this->validate($request, [
             'start' => 'required',
             'destination' => 'required'
@@ -34,7 +34,7 @@ class GeoController extends Controller
             $departure_time = 'now';
             $apiUrl = 'https://maps.googleapis.com/maps/api/distancematrix/json';
             $url = $apiUrl . '?' . 'origins=' . urlencode($start) . '&destinations=' . 
-            urlencode($destination) . '&departure_time=' . urlencode($departure_time) . '&key=' . GOOGLE_API;
+            urlencode($destination) . '&departure_time=' . urlencode($departure_time) . '&key=' . $google_api;
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $res = curl_exec($curl);
