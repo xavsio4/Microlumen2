@@ -101,7 +101,7 @@ $app->middleware([
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 //$app->register('Anam\PhantomMagick\ConverterServiceProvider');
-$app->register(\KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider::class);
+//$app->register(\KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider::class);
 $app->register(Illuminate\Mail\MailServiceProvider::class);
 
 /*
