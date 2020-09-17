@@ -25,7 +25,7 @@ class MailController extends Controller
         
         $this->validate($request, [
             'source' => 'required|url',
-            'subject' => 'reqired',
+            'subject' => 'required',
             'content' => 'required'
         ]);
 
