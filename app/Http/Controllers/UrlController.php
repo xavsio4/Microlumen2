@@ -163,7 +163,7 @@ class UrlController extends Controller
             
             
             //Get the title from get_contedocn
-            $title = this->get_title($json);
+            $title = $this->get_title($json);
             $rmetas['title'] = $title;
             
             
