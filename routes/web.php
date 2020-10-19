@@ -28,8 +28,8 @@ $router->post('url/geturltest', ['uses' => 'UrlController@getUrlTest']);
 
 $router->group(['prefix' => 'v1'], function () use ($router) {
 
-  // will return the page meta data from an URL
-  $router->get('mail/mlsend',  ['uses' => 'MailController@SendMailgun']); 
+ // will perform ocr with tesseract
+ $router->get('ocr/me',  ['uses' => 'OcrController@index']); 
 
   // will return the page meta data from an URL
   $router->get('mail/smt',  ['uses' => 'MailController@SendMailSmtp']); 

@@ -1,9 +1,11 @@
 
+Warning: Bear in mind that this is an on going project and that everything might no be coded as expected. But hey, we are free to improve it. 
+
 # Lumen Assorted micro services
 
 
 Even though I'm most familiar with Yii2 I've decided to give a try at Laravel through Lumen.
-During developments I'm often confronted to common tasks, therefore I though I could create a Rest Api layer common to my projects. 
+During developments I'm often confronted to common tasks, therefore I though I could create a Rest Api layer common to my projects. In other words, a collection of microservices I can use in any other development. 
 
 As most of my backends are using PHP (Directus, wordpress, Yii2) I picked Lumen (thou Tii2, Directus and WP are also able to perform that). 
 
@@ -52,6 +54,18 @@ example: `https://yourApiSite/v1/vat/ipvatrate`
   
 Unless you have a vpn, this will give your country list of vat rates.  
 
+## Using Google and Mailgun
+
+The following endpoint expects an api key from google
+
+
+The folloing endpoint expects an api key and domain from Mailgun. The whole idea is
+to be able to receive an email for any which site that uses, for example, a contact form. In order to identify the website there is a required source parameter. Also, insted of using GET we will be using POST.
+
+
+
+# A VUEJS APP
+In oder to be complete on how to use this microservices project there will be a VUEJS, independant, web app. 
 
 ## Contributing
 
