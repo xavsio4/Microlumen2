@@ -154,12 +154,11 @@ class UrlController extends Controller
         
         if ($json) {
             
-            // $rmetas = get_meta_tags($request->input('url'));
-            $rmetas = get_meta_tags($json);
+            $rmetas = get_meta_tags($request->input('url'));
             
-            foreach ($rmetas as $key => $item) {
-                $rmetas[$key] = $this->Utf8_ansi($item);
-            }
+            /*   foreach ($rmetas as $key => $item) {
+            $rmetas[$key] = $this->Utf8_ansi($item);
+            }*/
             
             
             
