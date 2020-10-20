@@ -209,13 +209,6 @@ class UrlController extends Controller
             $metaTags = null;
             $metaProperties = null;
             
-            /*   preg_match('/<title>([^>]*)<\/title>/si', $contents, $match );
-            
-            if (isset($match) && is_array($match) && count($match) > 0)
-            {
-            $title = strip_tags($match[1]);
-            } */
-            
             $title = $this->get_title($contents);
             
             preg_match_all('/<[\s]*meta[\s]*(name|property)="?' . '([^>"]*)"?[\s]*' . 'content="?([^>"]*)"?[\s]*[\/]?[\s]*>/si', $contents, $match);
@@ -267,13 +260,13 @@ class UrlController extends Controller
     {
         $result = false;
         
-        $contents = file_get_contents($url);
+        $contents = @file_get_contents($url);
         
         // Check if we need to go somewhere else
         
         if (isset($contents) && is_string($contents))
         {
-            preg_match_all('/<[\s]*meta[\s]*http-equiv="?REFRESH"?' . '[\s]*content="?[0-9]*;[\s]*URL[\s]*=[\s]*([^>"]*)"?' . '[\s]*[\/]?[\s]*>/si', $contents, $match);
+            preg_match_all('/<[\s]*meta[\s]*http-equiv="?REFRESH"?' . '[\s]*content="?[0-9]*;[\s]*URL[\s]*=[\s]*([^>"]*)"?' . '[\s]*[\/]?[\s]*>/siU', $contents, $match);
             
             if (isset($match) && is_array($match) && count($match) == 2 && count($match[1]) == 1)
             {
