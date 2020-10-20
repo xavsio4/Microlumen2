@@ -154,7 +154,8 @@ class UrlController extends Controller
         
         if ($json) {
             
-            $rmetas = get_meta_tags($request->input('url'));
+            // $rmetas = get_meta_tags($request->input('url'));
+            $rmetas = get_meta_tags($json);
             
             foreach ($rmetas as $key => $item) {
                 $rmetas[$key] = $this->Utf8_ansi($item);
@@ -168,7 +169,7 @@ class UrlController extends Controller
             
             
             
-            /*   if (( (!array_key_exists('og:image', $rmetas) || $rmetas['og:image'] == '') &&  (!array_key_exists('og:image', $rmetas) || $rmetas['twitter:image'] == ''))) {
+            /*   if (( (!array_key_exists('og:image', $rmetas) || $rmetas['og:image'] == '') &&  (!array_key_exists('og:image', $rmetas) || $rmetas['twitter:image:src'] == ''))) {
             $image = file_get_contents("https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url=$url&screenshot=true");
             $image = json_decode($image, true);
             $image = $image['screenshot']['data'];
