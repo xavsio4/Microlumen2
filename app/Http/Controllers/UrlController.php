@@ -209,12 +209,14 @@ class UrlController extends Controller
             $metaTags = null;
             $metaProperties = null;
             
-            preg_match('/<title>([^>]*)<\/title>/si', $contents, $match );
+            /*   preg_match('/<title>([^>]*)<\/title>/si', $contents, $match );
             
             if (isset($match) && is_array($match) && count($match) > 0)
             {
-                $title = strip_tags($match[1]);
-            }
+            $title = strip_tags($match[1]);
+            } */
+            
+            $title = $this->get_title($contents);
             
             preg_match_all('/<[\s]*meta[\s]*(name|property)="?' . '([^>"]*)"?[\s]*' . 'content="?([^>"]*)"?[\s]*[\/]?[\s]*>/si', $contents, $match);
             
@@ -228,12 +230,7 @@ class UrlController extends Controller
                 {
                     $metaTags = array();
                     $metaProperties = $metaTags;
-                    if ($raw) {
-                        if (version_compare(PHP_VERSION, '5.4.0') == -1)
-                            $flags = ENT_COMPAT;
-                        else
-                            $flags = ENT_COMPAT | ENT_HTML401;
-                    }
+                    
                     
                     for ($i=0, $limiti=count($names); $i < $limiti; $i++)
                     {
