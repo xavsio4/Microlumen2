@@ -242,15 +242,17 @@ class UrlController extends Controller
                         else
                             $meta_type = 'metaProperties';
                         if ($raw)
-                        ${$meta_type}[$names[$i]] = array (
+                            /*${$meta_type}[$names[$i]] = array (
                         'html' => htmlentities($originals[$i], $flags, 'UTF-8'),
                         'value' => $values[$i]
-                        );
+                        );*/
+                        ${$meta_type}[$names[$i]] = $values[$i];
                         else
-                        ${$meta_type}[$names[$i]] = array (
+                            /* ${$meta_type}[$names[$i]] = array (
                         'html' => $originals[$i],
                         'value' => $values[$i]
-                        );
+                        );*/
+                        ${$meta_type}[$names[$i]] = $values[$i];
                     }
                 }
             }
