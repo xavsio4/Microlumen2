@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Browsershot\Browsershot;
+use Yangqi\Htmldom\Htmldom;
 
 class UrlController extends Controller
 {
@@ -156,9 +157,9 @@ class UrlController extends Controller
             
             $rmetas = get_meta_tags($request->input('url'));
             
-            /*   foreach ($rmetas as $key => $item) {
-            $rmetas[$key] = $this->Utf8_ansi($item);
-            }*/
+            foreach ($rmetas as $key => $item) {
+                $rmetas[$key] = $this->Utf8_ansi($item);
+            }
             
             
             
@@ -185,6 +186,115 @@ class UrlController extends Controller
         }
     }
     
+    
+    public function getUrlData(request $request) // $raw - enable for raw display
+    {
+        
+        $this->validate($request, [
+        'url' => 'required|url',
+        'raw' => 'boolean'
+        ]);
+        
+        $raw = $request->input('raw', false);
+        
+        $result = false;
+        
+        $url = $request->input('url');
+        
+        $contents = $this->getUrlContents($url);
+        
+        if (isset($contents) && is_string($contents))
+        {
+            $title = null;
+            $metaTags = null;
+            $metaProperties = null;
+            
+            preg_match('/<title>([^>]*)<\/title>/si', $contents, $match );
+            
+            if (isset($match) && is_array($match) && count($match) > 0)
+            {
+                $title = strip_tags($match[1]);
+            }
+            
+            preg_match_all('/<[\s]*meta[\s]*(name|property)="?' . '([^>"]*)"?[\s]*' . 'content="?([^>"]*)"?[\s]*[\/]?[\s]*>/si', $contents, $match);
+            
+            if (isset($match) && is_array($match) && count($match) == 4)
+            {
+                $originals = $match[0];
+                $names = $match[2];
+                $values = $match[3];
+                
+                if (count($originals) == count($names) && count($names) == count($values))
+                {
+                    $metaTags = array();
+                    $metaProperties = $metaTags;
+                    if ($raw) {
+                        if (version_compare(PHP_VERSION, '5.4.0') == -1)
+                            $flags = ENT_COMPAT;
+                        else
+                            $flags = ENT_COMPAT | ENT_HTML401;
+                    }
+                    
+                    for ($i=0, $limiti=count($names); $i < $limiti; $i++)
+                    {
+                        if ($match[1][$i] == 'name')
+                            $meta_type = 'metaTags';
+                        else
+                            $meta_type = 'metaProperties';
+                        if ($raw)
+                        ${$meta_type}[$names[$i]] = array (
+                        'html' => htmlentities($originals[$i], $flags, 'UTF-8'),
+                        'value' => $values[$i]
+                        );
+                        else
+                        ${$meta_type}[$names[$i]] = array (
+                        'html' => $originals[$i],
+                        'value' => $values[$i]
+                        );
+                    }
+                }
+            }
+            
+            $result = array (
+            'title' => $title,
+            'metaTags' => $metaTags,
+            'metaProperties' => $metaProperties,
+            );
+        }
+        
+        return $result;
+    }
+    
+    private function getUrlContents($url, $maximumRedirections = null, $currentRedirection = 0)
+    {
+        $result = false;
+        
+        $contents = file_get_contents($url);
+        
+        // Check if we need to go somewhere else
+        
+        if (isset($contents) && is_string($contents))
+        {
+            preg_match_all('/<[\s]*meta[\s]*http-equiv="?REFRESH"?' . '[\s]*content="?[0-9]*;[\s]*URL[\s]*=[\s]*([^>"]*)"?' . '[\s]*[\/]?[\s]*>/si', $contents, $match);
+            
+            if (isset($match) && is_array($match) && count($match) == 2 && count($match[1]) == 1)
+            {
+                if (!isset($maximumRedirections) || $currentRedirection < $maximumRedirections)
+                {
+                    return getUrlContents($match[1][0], $maximumRedirections, ++$currentRedirection);
+                }
+                
+                $result = false;
+            }
+            else
+            {
+                $result = $contents;
+            }
+        }
+        
+        return $contents;
+    }
+    
     private function get_title($html)
     {
         preg_match("/<title(.+)<\/title>/siU", $html, $matches);
@@ -201,6 +311,7 @@ class UrlController extends Controller
             }
         }
     }
+    
     
     private function imgToBase64($path) {
         $type = pathinfo($path, PATHINFO_EXTENSION);
@@ -219,6 +330,15 @@ class UrlController extends Controller
         
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
         return $base64;
+    }
+    
+    private function getOgtags($url)
+    {
+        $html=  file_get_contents($url);
+        $pattern='/<\s*meta\s+property="og:([^"]+)"\s+content="([^"]*)/i';
+        if(preg_match_all($pattern, $html, $out))
+        return array_combine($out[1], $out[2]);
+        return array();
     }
     
 }
