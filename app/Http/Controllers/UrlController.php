@@ -212,7 +212,7 @@ class UrlController extends Controller
             $title = $this->get_title($contents);
             
             //preg_match_all('/<[\s]*meta[\s]*(name|property)="?' . '([^>"]*)"?[\s]*' . 'content="?([^>"]*)"?[\s]*[\/]?[\s]*>/si', $contents, $match);
-            preg_match_all('/<meta.*(name|property)="(.*)".*content="(.*)".*/>', $contents, $match);
+            preg_match_all('/<meta.*(name|property)="(.*)".*content="(.*)".*>/siU', $contents, $match);
             
             if (isset($match) && is_array($match) && count($match) == 4)
             {
