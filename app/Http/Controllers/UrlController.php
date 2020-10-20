@@ -186,7 +186,17 @@ class UrlController extends Controller
         }
     }
     
-    
+    /**
+    * Gets the meta data of the provided url
+    *
+    * Return a json string containing the page header parsed
+    *
+    *
+    * @return Json
+    *
+    * @param String url
+    * @param  Boolean screenshot (optional default 0)
+    */
     public function getUrlData(request $request) // $raw - enable for raw display
     {
         
@@ -228,30 +238,34 @@ class UrlController extends Controller
                     
                     for ($i=0, $limiti=count($names); $i < $limiti; $i++)
                     {
-                        if ($match[1][$i] == 'name')
-                            $meta_type = 'metaTags';
+                        /*  if ($match[1][$i] == 'name')
+                        $meta_type = 'metaTags';
                         else
-                            $meta_type = 'metaProperties';
+                        $meta_type = 'metaProperties';
                         if ($raw)
-                            /*${$meta_type}[$names[$i]] = array (
+                        ${$meta_type}[$names[$i]] = array (
                         'html' => htmlentities($originals[$i], $flags, 'UTF-8'),
                         'value' => $values[$i]
-                        );*/
+                        );
                         ${$meta_type}[$names[$i]] = $values[$i];
                         else
-                            /* ${$meta_type}[$names[$i]] = array (
+                        ${$meta_type}[$names[$i]] = array (
                         'html' => $originals[$i],
                         'value' => $values[$i]
-                        );*/
-                        ${$meta_type}[$names[$i]] = $values[$i];
+                        );
+                        ${$meta_type}[$names[$i]] = $values[$i];*/
+                        
+                        $names[$i] = $values[$i];
                     }
                 }
             }
             
             $result = array (
             'title' => $title,
-            'metaTags' => $metaTags,
-            'metaProperties' => $metaProperties,
+            'metaTags' => $names,
+            'metaProperties' => $names,
+            // 'metaTags' => $metaTags,
+            // 'metaProperties' => $metaProperties,
             );
         }
         return response()->json(['valid' => true, 'msg' => 'url found', 'data'=>$result], 200);
