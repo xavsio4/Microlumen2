@@ -255,7 +255,7 @@ class UrlController extends Controller
                         );
                         ${$meta_type}[$names[$i]] = $values[$i];*/
                         
-                        $names[$i] = $values[$i];
+                        [$names[$i]] = $values[$i];
                     }
                 }
             }
