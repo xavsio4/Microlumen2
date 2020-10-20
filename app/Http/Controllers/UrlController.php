@@ -261,8 +261,7 @@ class UrlController extends Controller
             'metaProperties' => $metaProperties,
             );
         }
-        
-        return $result;
+        return response()->json(['valid' => true, 'msg' => 'url found', 'data'=>$result], 200);
     }
     
     private function getUrlContents($url, $maximumRedirections = null, $currentRedirection = 0)
