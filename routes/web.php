@@ -38,10 +38,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->post('measure/create',  ['uses' => 'MeasureController@create']);
     
     // will return the page meta data from an URL
-    $router->get('url/fetchmeta',  ['uses' => 'UrlController@fetchMeta']);
-    
-    // will return the page meta data from an URL
-    $router->get('url/fetchmetab',  ['uses' => 'UrlController@getUrlData']);
+    $router->get('url/fetchmeta',  ['uses' => 'UrlController@getUrlData']);
     
     // will return the page meta data from an URL
     $router->get('url/screenshot',  ['uses' => 'UrlController@getScreenshot']);
