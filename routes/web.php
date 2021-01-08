@@ -58,12 +58,18 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     // will return the distance between two addresses
     $router->get('geo/distance',  ['uses' => 'GeoController@getDistance']);
     
+    //will increment the counter of the two parameters passed as a combined key
+    $router->get('hit/count/{domain}[/{item}]',  ['uses' => 'HitcountController@hit']);
+    
+    
     // default response whne no route is given
     $router->get('/', function () use ($router) {
         //return $router->app->version();
         return "Ho hey..how are you ? You...look lost..";
         
     });
+    
+    
     
     /*  $router->get('authors/{id}', ['uses' => 'UrlController@']);
     
