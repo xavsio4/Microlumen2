@@ -352,8 +352,15 @@ class UrlController extends Controller
     /**
     * Html to PDF using dompdf
     */
-    public function html2pdf($url)
+    public function html2pdf(request $request)
     {
+        $this->validate($request, [
+        'url' => 'required|url'
+        ]);
+        
+        $url = $request->input('url');
+        
+        
         $html=  file_get_contents($url);
         
         $html2pdf = new Html2Pdf();
