@@ -43,6 +43,9 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     // will return the page meta data from an URL
     $router->get('url/screenshot',  ['uses' => 'UrlController@getScreenshot']);
     
+    // html to pdf to image
+    $router->get('url/html2pdf',  ['uses' => 'UrlController@html2pdf']);
+    
     // will check if vat number is valid or not and will return data for valid number
     $router->get('vat/checkvat',  ['uses' => 'VatController@checkVat']);
     

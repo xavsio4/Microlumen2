@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Browsershot\Browsershot;
 use Yangqi\Htmldom\Htmldom;
+use Imagick;
+use Spipu\Html2Pdf\Html2Pdf;
 
 class UrlController extends Controller
 {
@@ -345,6 +347,31 @@ class UrlController extends Controller
         if(preg_match_all($pattern, $html, $out))
         return array_combine($out[1], $out[2]);
         return array();
+    }
+    
+    /**
+    * Html to PDF using dompdf
+    */
+    public function html2pdf($url)
+    {
+        $html=  file_get_contents($url);
+        
+        $html2pdf = new Html2Pdf();
+        $html2pdf->writeHTML($html);
+        $html2pdf->output('temp.pdf');
+        
+        return 'ok';
+        
+        $im = new imagick('temp.pdf');
+        $im->setImageFormat( "jpg" );
+        $img_name = time().'.jpg';
+        $im->setSize(800,600);
+        $result = $im->writeImage($img_name);
+        $im->clear();
+        $im->destroy();
+        
+        $html2pdf->clean();
+        return $result;
     }
     
 }
