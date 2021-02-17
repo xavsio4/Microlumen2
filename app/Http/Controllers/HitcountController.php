@@ -5,7 +5,8 @@
 * to pages or actions
 * The client has to manage the list of the endpoints.
 *
-*
+* Mandatory parameter is the domain
+* Optional is item which can be
 */
 
 namespace App\Http\Controllers;

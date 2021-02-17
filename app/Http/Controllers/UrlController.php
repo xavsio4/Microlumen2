@@ -363,22 +363,24 @@ class UrlController extends Controller
         
         $html=  file_get_contents($url);
         
+        //$html = '<h1>tadaaa</h1>';
+        
         $html2pdf = new Html2Pdf();
         $html2pdf->writeHTML($html);
-        $html2pdf->output('temp.pdf');
+        $html2pdf->output(base_path().'/storage/app/temp.pdf','F');
         
-        return 'ok';
         
-        $im = new imagick('temp.pdf');
+        $im = new imagick(base_path().'/storage/app/temp.pdf');
         $im->setImageFormat( "jpg" );
         $img_name = time().'.jpg';
         $im->setSize(800,600);
-        $result = $im->writeImage($img_name);
+        $imgstring = $im->__toString();
+        //$im->writeImage($img_name);
         $im->clear();
         $im->destroy();
         
         $html2pdf->clean();
-        return $result;
+        return $imgstring;
     }
     
 }
