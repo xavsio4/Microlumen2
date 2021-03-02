@@ -7,6 +7,7 @@ use Spatie\Browsershot\Browsershot;
 use Yangqi\Htmldom\Htmldom;
 use Imagick;
 use Spipu\Html2Pdf\Html2Pdf;
+use GuzzleHttp\Client;
 
 class UrlController extends Controller
 {
@@ -383,4 +384,40 @@ class UrlController extends Controller
         return $imgstring;
     }
     
+    /**
+    * Peekalink
+    */
+    public function peekalink(request $request)
+    {
+        //$client = new \Guzzle\Service\Client('http://api.github.com/users/');
+        
+        
+        /*  response = requests.post(
+        "https://api.peekalink.io/",
+        headers={"X-API-Key": "YourSecretKey"},
+        data={"link": "https://bit.ly/3frD2OP"},
+        );
+        
+        return $client; */
+        
+        // $response = $client->get("users/$username")->send();
+        
+        $url = $request->input('url');
+        
+        $client = new Client();
+        $client->setDefaultOption('headers', array('X-API-Key' => env('PEEKALINK_API')));
+        $res = $client->request('POST', 'https://api.peekalink.io/', [
+        'form_params' => [
+        'data' => $url,
+        ]
+        ]);
+        // echo $res->getStatusCode();
+        // 200
+        //   echo $res->getHeader('X-API-Key');
+        // 'application/json; charset=utf8'
+        return $res->getBody();
+        // {"type":"User"...'
+        
+        
+    }
 }
