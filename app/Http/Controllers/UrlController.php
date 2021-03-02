@@ -389,18 +389,9 @@ class UrlController extends Controller
     */
     public function peekalink(request $request)
     {
-        //$client = new \Guzzle\Service\Client('http://api.github.com/users/');
-        
-        
-        /*  response = requests.post(
-        "https://api.peekalink.io/",
-        headers={"X-API-Key": "YourSecretKey"},
-        data={"link": "https://bit.ly/3frD2OP"},
-        );
-        
-        return $client; */
-        
-        // $response = $client->get("users/$username")->send();
+        $this->validate($request, [
+        'url' => 'required|url'
+        ]);
         
         $url = $request->input('url');
         
@@ -410,18 +401,16 @@ class UrlController extends Controller
         'debug' => TRUE,
         'headers' => [
         'Content-Type' => 'application/x-www-form-urlencoded',
-        'X-API-Key' => env('PEEKALINK_API')
+        'X-Api-Key' => env('PEEKALINK_API')
         ],
         'form_params' => [
-        'data' => $url,
+        'api_key' => env('PEEKALINK_API'),
+        'link' => $url
         ]
         ]);
         // echo $res->getStatusCode();
         // 200
-        //   echo $res->getHeader('X-API-Key');
-        // 'application/json; charset=utf8'
         return $res->getBody();
-        // {"type":"User"...'
         
         
     }
