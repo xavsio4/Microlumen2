@@ -398,7 +398,6 @@ class UrlController extends Controller
         $client = new Client();
         // $client->setDefaultOption('headers', array('X-API-Key' => env('PEEKALINK_API')));
         $res = $client->request('POST', 'https://api.peekalink.io/', [
-        'debug' => TRUE,
         'headers' => [
         'Content-Type' => 'application/x-www-form-urlencoded',
         'X-Api-Key' => env('PEEKALINK_API')
