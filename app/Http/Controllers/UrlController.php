@@ -395,15 +395,14 @@ class UrlController extends Controller
         
         $url = $request->input('url');
         
-        $client = new Client();
-        // $client->setDefaultOption('headers', array('X-API-Key' => env('PEEKALINK_API')));
+        $client = new GuzzleHttp\Client();
         $res = $client->request('POST', 'https://api.peekalink.io/', [
         'headers' => [
         'Content-Type' => 'application/x-www-form-urlencoded',
         'X-Api-Key' => env('PEEKALINK_API')
         ],
         'form_params' => [
-        'api_key' => env('PEEKALINK_API'),
+        // 'api_key' => env('PEEKALINK_API'),
         'link' => $url
         ]
         ]);
