@@ -19,17 +19,17 @@ class GpsController extends Controller
     
     public function filein(request $request)
     {
-        $req->validate([
+        $request->validate([
         'file' => 'required|mimes:gpx|max:2048'
         ]);
         
         $fileModel = new File;
         
-        if($req->file()) {
-            $fileName = time().'_'.$req->file->getClientOriginalName();
-            $filePath = $req->file('file')->storeAs('uploads', $fileName, 'public');
+        if($request->file()) {
+            $fileName = time().'_'.$request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
             
-            $fileModel->name = time().'_'.$req->file->getClientOriginalName();
+            $fileModel->name = time().'_'.$request->file->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
             $fileModel->save();
             
