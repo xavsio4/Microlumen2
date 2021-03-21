@@ -19,7 +19,7 @@ class GpsController extends Controller
     
     public function filein(request $request)
     {
-        $request->validate([
+        $this->validate([
         'file' => 'required|mimes:gpx|max:2048'
         ]);
         
