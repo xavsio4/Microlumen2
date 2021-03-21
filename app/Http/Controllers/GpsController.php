@@ -38,25 +38,25 @@ class GpsController extends Controller
         }
     }
     
-}
-
-/**
-* Parse a GPX File
-*/
-public function parseFile(request $request)
-{
-    $output = '';
-    $gpx = simplexml_load_file('e.gpx');
-    /* foreach($xml->trk->trkseg->trkpt as $trkpt) {
     
-    $namespaces = $trkpt->getNamespaces(true);
-    $gpxtpx = $trkpt->extensions->children($namespaces['gpxtpx']);
-    $hr = (string) $gpxtpx->TrackPointExtension->hr;
-    $output .= '<pre>'.print_r($hr).'</pre>';
-    }*/
     
-    foreach($gpx->trk->trkseg->children() as $trkpts) {
-        $output .= (string)$trkpts->extensions->children('gpxtpx',true)->TrackPointExtension->hr;
+    /**
+    * Parse a GPX File
+    */
+    public function parseFile(request $request)
+    {
+        $output = '';
+        $gpx = simplexml_load_file('e.gpx');
+        /* foreach($xml->trk->trkseg->trkpt as $trkpt) {
+        
+        $namespaces = $trkpt->getNamespaces(true);
+        $gpxtpx = $trkpt->extensions->children($namespaces['gpxtpx']);
+        $hr = (string) $gpxtpx->TrackPointExtension->hr;
+        $output .= '<pre>'.print_r($hr).'</pre>';
+        }*/
+        
+        foreach($gpx->trk->trkseg->children() as $trkpts) {
+            $output .= (string)$trkpts->extensions->children('gpxtpx',true)->TrackPointExtension->hr;
+        }
     }
-}
 }
