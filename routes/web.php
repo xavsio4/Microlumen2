@@ -31,12 +31,16 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     // will perform ocr with tesseract
     $router->get('ocr/me',  ['uses' => 'OcrController@index']);
     
-    // will return the page meta data from an URL
+    // EMAIL
+    // Send a message via email
     $router->get('mail/smt',  ['uses' => 'MailController@SendMailSmtp']);
+    
     
     // will return the page meta data from an URL
     $router->post('measure/create',  ['uses' => 'MeasureController@create']);
     
+    
+    // URL
     // will return the page meta data from an URL
     $router->get('url/fetchmeta',  ['uses' => 'UrlController@getUrlData']);
     
@@ -49,6 +53,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     // html to pdf to image
     $router->post('url/peekalink',  ['uses' => 'UrlController@peekalink']);
     
+    // VAT
     // will check if vat number is valid or not and will return data for valid number
     $router->get('vat/checkvat',  ['uses' => 'VatController@checkVat']);
     
@@ -61,13 +66,19 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     // will return the vat rate of the located ip country address
     $router->get('vat/ipvatrate',  ['uses' => 'VatController@ipVatRate']);
     
+    // GEO
     // will return the distance between two addresses
     $router->get('geo/distance',  ['uses' => 'GeoController@getDistance']);
     
+    
+    // COUNTER
     //will increment the counter of the two parameters passed as a combined key
     $router->get('hit/count/{domain}[/{item}]',  ['uses' => 'HitcountController@hit']);
     
+    // GPX
+    $router->post('gpx/upload',  ['uses' => 'GpxController@filein']);
     
+    // DEFAULT
     // default response whne no route is given
     $router->get('/', function () use ($router) {
         //return $router->app->version();
