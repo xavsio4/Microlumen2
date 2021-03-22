@@ -23,15 +23,15 @@ class GpsController extends Controller
         'file' => 'required|max:2048'
         ]);
         
-        $fileModel = new File;
+        //$fileModel = new File;
         
         if($request->file()) {
             $fileName = time().'_'.$request->file->getClientOriginalName();
             $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
             
-            $fileModel->name = time().'_'.$request->file->getClientOriginalName();
-            $fileModel->file_path = '/storage/' . $filePath;
-            $fileModel->save();
+            //  $fileModel->name = time().'_'.$request->file->getClientOriginalName();
+            //  $fileModel->file_path = '/storage/' . $filePath;
+            //  $fileModel->save();
             
             
             return response()->json(['status' => 'success', 'data' => $fileName], 200);
