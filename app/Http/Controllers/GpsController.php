@@ -33,10 +33,11 @@ class GpsController extends Controller
             //  $fileModel->file_path = '/storage/' . $filePath;
             //  $fileModel->save();
             
+            $result = $this.parseFile($request->file());
             
-            return response()->json(['status' => 'success', 'data' => $fileName], 200);
+            return response()->json(['status' => 'success', 'data' => $result], 200);
         }
-        return response()->json(['status' => 'failed', 'data' => $request], 205);
+        return response()->json(['status' => 'failed', 'data' => $request], 405);
     }
     
     
@@ -44,10 +45,10 @@ class GpsController extends Controller
     /**
     * Parse a GPX File
     */
-    public function parseFile(request $request)
+    public function parseFile($file)
     {
         $output = '';
-        $gpx = simplexml_load_file('e.gpx');
+        $gpx = simplexml_load_file($file);
         /* foreach($xml->trk->trkseg->trkpt as $trkpt) {
         
         $namespaces = $trkpt->getNamespaces(true);
@@ -59,5 +60,6 @@ class GpsController extends Controller
         foreach($gpx->trk->trkseg->children() as $trkpts) {
             $output .= (string)$trkpts->extensions->children('gpxtpx',true)->TrackPointExtension->hr;
         }
+        return $output;
     }
 }
