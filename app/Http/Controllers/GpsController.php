@@ -36,6 +36,7 @@ class GpsController extends Controller
             
             return response()->json(['status' => 'success', 'data' => $fileName], 200);
         }
+        return response()->json(['status' => 'failed', 'data' => $request], 205);
     }
     
     
