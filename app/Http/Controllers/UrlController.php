@@ -395,7 +395,7 @@ class UrlController extends Controller
         
         $url = $request->input('url');
         
-        $client = new GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client();
         $res = $client->request('POST', 'https://api.peekalink.io/', [
         'headers' => [
         'Content-Type' => 'application/x-www-form-urlencoded',
