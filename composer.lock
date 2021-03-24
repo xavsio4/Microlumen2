@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c68b47a69d59b10ec5cd825d77803cf5",
+    "content-hash": "f5fe8d87f98154e38b24648a640beced",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -4256,6 +4256,51 @@
                 "stylesheet"
             ],
             "time": "2020-06-01T09:10:00+00:00"
+        },
+        {
+            "name": "sibyx/phpgpx",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sibyx/phpGPX.git",
+                "reference": "e8841db16e751a8968a8c0cdc48100cd74407c3d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sibyx/phpGPX/zipball/e8841db16e751a8968a8c0cdc48100cd74407c3d",
+                "reference": "e8841db16e751a8968a8c0cdc48100cd74407c3d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-simplexml": "*",
+                "lib-libxml": "*",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "evert/phpdoc-md": "~0.2.0",
+                "friendsofphp/php-cs-fixer": "^2.18",
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "phpGPX\\": "src/phpGPX/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jakub Dubec",
+                    "email": "jakub.dubec@gmail.com",
+                    "homepage": "https://jakubdubec.me"
+                }
+            ],
+            "description": "A simple PHP library for GPX import/export",
+            "time": "2021-02-28T19:29:40+00:00"
         },
         {
             "name": "spipu/html2pdf",

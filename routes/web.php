@@ -76,7 +76,8 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->get('hit/count/{domain}[/{item}]',  ['uses' => 'HitcountController@hit']);
     
     // GPX
-    $router->post('gpx/filein',  ['uses' => 'GpsController@filein']);
+    $router->post('gps/filein',  ['uses' => 'GpsController@filein']);
+    $router->get('gps/parse',  ['uses' => 'GpsController@parseFile']);
     
     // DEFAULT
     // default response whne no route is given
