@@ -274,6 +274,7 @@ class UrlController extends Controller
         
         if (($result == false) || empty($result))
         {
+            return $result;
             
             $client = new \GuzzleHttp\Client();
             $res = $client->request('POST', 'https://api.peekalink.io/', [
