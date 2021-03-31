@@ -164,11 +164,30 @@ class UrlController extends Controller
                 $rmetas[$key] = $this->Utf8_ansi($item);
             }
             
-            
-            
             //Get the title from get_contedocn
             $title = $this->get_title($json);
             $rmetas['title'] = $title;
+            
+            
+            if (empty($rmetas))
+            {
+                
+                $client = new \GuzzleHttp\Client();
+                $res = $client->request('POST', 'https://api.peekalink.io/', [
+                'headers' => [
+                'Content-Type' => 'application/x-www-form-urlencoded',
+                'X-Api-Key' => env('PEEKALINK_API')
+                ],
+                'form_params' => [
+                // 'api_key' => env('PEEKALINK_API'),
+                'link' => $url
+                ]
+                ]);
+                // echo $res->getStatusCode();
+                // 200
+                $rmetas = $res->getBody();
+                
+            }
             
             
             
