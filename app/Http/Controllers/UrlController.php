@@ -168,27 +168,7 @@ class UrlController extends Controller
             $title = $this->get_title($json);
             $rmetas['title'] = $title;
             
-            return $rmetas;
-            //if (empty($rmetas))
-            if (($rmetas == false) || empty($rmetas))
-            {
-                
-                $client = new \GuzzleHttp\Client();
-                $res = $client->request('POST', 'https://api.peekalink.io/', [
-                'headers' => [
-                'Content-Type' => 'application/x-www-form-urlencoded',
-                'X-Api-Key' => env('PEEKALINK_API')
-                ],
-                'form_params' => [
-                // 'api_key' => env('PEEKALINK_API'),
-                'link' => $url
-                ]
-                ]);
-                // echo $res->getStatusCode();
-                // 200
-                $rmetas = $res->getBody();
-                
-            }
+            
             
             
             
@@ -291,6 +271,27 @@ class UrlController extends Controller
             // 'metaProperties' => $metaProperties,
             );
         }
+        
+        if (($result == false) || empty($result))
+        {
+            
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('POST', 'https://api.peekalink.io/', [
+            'headers' => [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'X-Api-Key' => env('PEEKALINK_API')
+            ],
+            'form_params' => [
+            // 'api_key' => env('PEEKALINK_API'),
+            'link' => $url
+            ]
+            ]);
+            // echo $res->getStatusCode();
+            // 200
+            $rmetas = $res->getBody();
+            
+        }
+        
         return response()->json(['valid' => true, 'msg' => 'url found', 'data'=>$result], 200);
     }
     
