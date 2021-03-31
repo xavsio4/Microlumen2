@@ -169,7 +169,8 @@ class UrlController extends Controller
             $rmetas['title'] = $title;
             
             
-            if (empty($rmetas))
+            //if (empty($rmetas))
+            if (!$rmetas || empty($rmetas))
             {
                 
                 $client = new \GuzzleHttp\Client();
