@@ -288,7 +288,7 @@ class UrlController extends Controller
             ]);
             // echo $res->getStatusCode();
             // 200
-            $rmetas = $res->getBody();
+            $result = $res->getBody();
             
         }
         
