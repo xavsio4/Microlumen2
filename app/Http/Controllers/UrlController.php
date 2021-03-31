@@ -168,7 +168,7 @@ class UrlController extends Controller
             $title = $this->get_title($json);
             $rmetas['title'] = $title;
             
-            
+            return $rmetas;
             //if (empty($rmetas))
             if (($rmetas == false) || empty($rmetas))
             {
