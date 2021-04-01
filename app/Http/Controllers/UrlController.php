@@ -288,9 +288,9 @@ class UrlController extends Controller
             ]);
             // echo $res->getStatusCode();
             // 200
-            
+            $jsonpeek = $res->getBody();
             $result = array (
-            'title' => $res->getBody()->title,
+            'title' => $jsonpeek[0]->title,
             'meta' => $res->getBody(),
             //'metaProperties' => $names,
             // 'metaTags' => $metaTags,
