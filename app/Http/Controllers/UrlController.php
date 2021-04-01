@@ -288,11 +288,18 @@ class UrlController extends Controller
             ]);
             // echo $res->getStatusCode();
             // 200
-            $result = $res->getBody();
+            
+            $result = array (
+            'title' => $res->getBody()->title,
+            'meta' => $res->getBody(),
+            //'metaProperties' => $names,
+            // 'metaTags' => $metaTags,
+            // 'metaProperties' => $metaProperties,
+            );
             
         }
         
-        return $result;
+        // return $result;
         
         return response()->json(['valid' => true, 'msg' => 'url found', 'data'=>$result], 200);
     }
