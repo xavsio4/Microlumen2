@@ -288,9 +288,7 @@ class UrlController extends Controller
             ]);
             // echo $res->getStatusCode();
             // 200
-            $result = $res->getBody();
-            
-            return $result;
+            $result[] = $res->getBody();
             
         }
         
