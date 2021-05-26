@@ -58,6 +58,7 @@ class HitcountController extends Controller
             else {
                 $hitcount = new Hitcount();
                 $hitcount->domain = $domain;
+                $hitcount->item = $item;
                 $hitcount->save();
             }
             
