@@ -68,9 +68,11 @@ class HitcountController extends Controller
         return false;
     }
     
-    public function view(request $request)
+    public function view(request $request,$domain,$item=null)
     {
-        $hitcount = Hitcount::findOne(condition);
+        $hitcount = Hitcount::where('domain', $domain)->where('item',$item)
+            ->first();
+        return $hitcount;    
         
     }
 }

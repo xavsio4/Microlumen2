@@ -74,6 +74,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     // COUNTER
     //will increment the counter of the two parameters passed as a combined key
     $router->get('hit/count/{domain}[/{item}]',  ['uses' => 'HitcountController@hit']);
+    $router->get('hit/view/{domain}[/{item}]',  ['uses' => 'HitcountController@view']);
     
     // GPX
     $router->post('gps/filein',  ['uses' => 'GpsController@filein']);
