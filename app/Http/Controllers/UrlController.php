@@ -265,7 +265,7 @@ class UrlController extends Controller
             
             $result = array (
             'title' => $title,
-            'meta' => $data,
+            'meta' => $contents,
             //'metaProperties' => $names,
             // 'metaTags' => $metaTags,
             // 'metaProperties' => $metaProperties,
