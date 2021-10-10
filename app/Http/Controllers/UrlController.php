@@ -161,12 +161,12 @@ class UrlController extends Controller
             $rmetas = get_meta_tags($request->input('url'));
             
             foreach ($rmetas as $key => $item) {
-                $rmetas[$key] = $this->Utf8_ansi($item);
+                $rmetas[$key] = mb_convert_encoding($item, "UTF-8", "auto");
             }
             
             //Get the title from get_contedocn
             $title = $this->get_title($json);
-            $rmetas['title'] = $title;
+            $rmetas['title'] = mb_convert_encoding($title, "UTF-8", "auto");;
             
             
             
@@ -301,7 +301,7 @@ class UrlController extends Controller
         
         // return $result;
         
-        return response()->json(['valid' => true, 'msg' => 'url found', 'data'=>$result], 200);
+        return response()->json(['valid' => true, 'msg' => 'url found', 'data'=>, mb_convert_encoding($result,"UTF-8", "auto")], 200);
     }
     
     private function getUrlContents($url, $maximumRedirections = null, $currentRedirection = 0)
