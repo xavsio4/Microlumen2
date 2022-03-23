@@ -1,11 +1,24 @@
 <?php
+/**
+* This controller updates the hitcount models
+* which is a simple counter system that can be applied
+* to pages or actions
+* The client has to manage the list of the endpoints.
+*
+* Mandatory parameter is the domain
+* Optional is item which can be
+*/
 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use phpGPX\phpGPX;
+use App\Hitcount;
 
-class GpsController extends Controller
+use adriangibbons\phpFITFileAnalysis;
+
+
+
+class FitController extends Controller
 {
     
     /**
@@ -56,16 +69,17 @@ class GpsController extends Controller
     public function parseFile($file)
     {
         $stats = [];
-        $segments = [];
         $distance = 0;
         $nbrTracks = 0;
         $cumulativeElevationGain = 0;
         $output = [];
-        $path = ".." . DIRECTORY_SEPARATOR .'storage' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR.'EV3.gpx';
+        //$path = ".." . DIRECTORY_SEPARATOR .'storage' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR.'EV3.gpx';
+
+        $pFFA = new phpFITFileAnalysis($file);
         
-        $gpx = new phpGPX();
         
-        $file = $gpx->load($file);
+        
+       /* $file = $gpx->load($file);
         
         foreach ($file->tracks as $track)
         {
@@ -77,21 +91,21 @@ class GpsController extends Controller
             {
                 // Statistics for segment of track
                 $segment->stats->toArray();
-                array_push($segments,$segment->stats->toArray());
             }
-        }
+        } */
         
         //total distance
-        foreach ($stats as $stat)
+      /*  foreach ($stats as $stat)
         {
             $output = $stat['distance'];
             $distance += $stat['distance'];
             $cumulativeElevationGain += $stat['cumulativeElevationGain'];
         }
         
-        $nbrTracks = count($stats);
+        $nbrTracks = count($stats); */
         
-        return serialize($stats);
-        //.'Total elevation: '.number_format($cumulativeElevationGain).' Total distance: '.number_format($distance/1000, 2).' km, Nb tracks: '.$nbrTracks;
+        return $pFFA->data_mesgs;
     }
+     
+   
 }

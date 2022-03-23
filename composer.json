@@ -22,7 +22,8 @@
         "sibyx/phpgpx": "^1.1",
         "spipu/html2pdf": "^5.2",
         "thiagoalessio/tesseract_ocr": "^2.9",
-        "yangqi/htmldom": "1.0.*"
+        "yangqi/htmldom": "1.0.*",
+        "adriangibbons/php-fit-file-analysis": "^3.2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",

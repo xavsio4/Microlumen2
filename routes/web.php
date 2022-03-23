@@ -79,6 +79,10 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     // GPX
     $router->post('gps/filein',  ['uses' => 'GpsController@filein']);
     $router->get('gps/parse',  ['uses' => 'GpsController@parseFile']);
+
+    // FIT
+    $router->post('fit/filein',  ['uses' => 'FitController@filein']);
+    $router->get('fit/parse',  ['uses' => 'FitController@parseFile']);
     
     // DEFAULT
     // default response whne no route is given
