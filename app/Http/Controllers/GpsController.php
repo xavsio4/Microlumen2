@@ -57,6 +57,7 @@ class GpsController extends Controller
     {
         $stats = [];
         $segments = [];
+        $trk = [];
         $distance = 0;
         $nbrTracks = 0;
         $cumulativeElevationGain = 0;
@@ -72,6 +73,7 @@ class GpsController extends Controller
             // Statistics for whole track
             $track->stats->toArray();
             array_push($stats,$track->stats->toArray());
+            array_push($trk,array('point'=>stripslashes($track->name),'stats'=>$track->stats->toArray()));
             
             foreach ($track->segments as $segment)
             {
@@ -90,8 +92,7 @@ class GpsController extends Controller
         }
         
         $nbrTracks = count($stats);
-        
-        return serialize($stats);
+        return $trk;
         //.'Total elevation: '.number_format($cumulativeElevationGain).' Total distance: '.number_format($distance/1000, 2).' km, Nb tracks: '.$nbrTracks;
     }
 }
