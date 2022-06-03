@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use phpGPX\phpGPX;
+use App\RouteSteps;
 
 class GpsController extends Controller
 {
@@ -74,13 +75,29 @@ class GpsController extends Controller
             $track->stats->toArray();
             array_push($stats,$track->stats->toArray());
             array_push($trk,array('point'=>stripslashes($track->name),'stats'=>$track->stats->toArray()));
-            
+
+            $segments = [];
             foreach ($track->segments as $segment)
             {
                 // Statistics for segment of track
                 $segment->stats->toArray();
-                array_push($segments,$segment->stats->toArray());
+                array_push($segments,$segment);
             }
+            
+            
+            if($track->name) {
+            $routeStep = New RouteSteps();
+            $routeStep->name = stripslashes($track->name);
+            $routeStep->distance = $track->stats->distance;
+            $routeStep->elevationgain = $track->stats->cumulativeElevationGain;
+            $routeStep->elevationloss = $track->stats->cumulativeElevationLoss;
+            $routeStep->longstart = $segments[0]->points->longitude;
+            $routeStep->added_flag = 0;
+            $routeStep->save();
+            }
+            
+            
+            
         }
         
         //total distance
@@ -92,7 +109,9 @@ class GpsController extends Controller
         }
         
         $nbrTracks = count($stats);
-        return $trk;
+        //return $trk;
+        return $segments;
+        //return $file->metadata;
         //.'Total elevation: '.number_format($cumulativeElevationGain).' Total distance: '.number_format($distance/1000, 2).' km, Nb tracks: '.$nbrTracks;
     }
 }
