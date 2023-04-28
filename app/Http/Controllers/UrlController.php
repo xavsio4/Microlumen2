@@ -452,17 +452,16 @@ class UrlController extends Controller
         'url' => 'required|url',
         ]);
         $url = $request->input('url');
-        $options =  '{
-    "type": "jpeg",
-    "clip": {
-      "height": 400,
-      "width": 800,
+        $options =  [
+    "type" =>"jpeg",
+    "clip" => [
+      "height" => 400,
+      "width" => 800,
     //  "x": 90,
     //  "y": 100
-    },
+    ],
     "fullPage": false,
-    "encoding": "binary"
-  }';
+];
          $client = new \GuzzleHttp\Client();
         $res = $client->request('POST', 'https://chrome.browserless.io/screenshot?token='.env('BROWSERLESS_API'), [
         'headers' => [
@@ -471,7 +470,7 @@ class UrlController extends Controller
         ],
         'json' => [ 
             'url' => $url,
-           // 'options' => $options,
+            'options' => $options,
         ] 
         ]);
         // echo $res->getStatusCode();
