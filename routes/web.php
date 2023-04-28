@@ -46,6 +46,9 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     
     // will return the page meta data from an URL
     $router->get('url/screenshot',  ['uses' => 'UrlController@getScreenshot']);
+
+    // will return the page meta data from an URL
+    $router->get('url/shotr',  ['uses' => 'UrlController@screenshot']);
     
     // html to pdf to image
     $router->get('url/html2pdf',  ['uses' => 'UrlController@html2pdf']);

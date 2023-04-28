@@ -442,4 +442,39 @@ class UrlController extends Controller
         
         
     }
+
+    /**
+     * browserless.io
+     */
+    public function screenshot(request $request)
+    {
+        $url = $request->input('url');
+        $options =  {
+    "type": "jpeg",
+    "clip": {
+      "height": 400,
+      "width": 800,
+    //  "x": 90,
+    //  "y": 100
+    },
+    "fullPage": false,
+    "encoding": "binary"
+  };
+         $client = new \GuzzleHttp\Client();
+        $res = $client->request('POST', 'https://chrome.browserless.io/screenshot?token=', [
+        'headers' => [
+            'Cache-Control' => 'no-cache',
+        'Content-Type' => 'application/json',
+        'X-Api-Key' => env('PEEKALINK_API')
+        ],
+        'form_params' => [
+        // 'api_key' => env('PEEKALINK_API'),
+        'link' => $url
+        ]
+        ]);
+        // echo $res->getStatusCode();
+        // 200
+        return $res->getBody();
+
+    }
 }
