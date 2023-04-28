@@ -467,7 +467,7 @@ class UrlController extends Controller
         'Content-Type' => 'application/json',
         ],
         'form_params' => [
-         'options' => $options,
+        // 'options' => $options,
         'url' => $url
         ]
         ]);
