@@ -448,6 +448,9 @@ class UrlController extends Controller
      */
     public function screenshot(request $request)
     {
+          $this->validate($request, [
+        'url' => 'required|url',
+        ]);
         $url = $request->input('url');
         $options =  '{
     "type": "jpeg",
@@ -461,15 +464,15 @@ class UrlController extends Controller
     "encoding": "binary"
   }';
          $client = new \GuzzleHttp\Client();
-        $res = $client->request('POST', 'https://chrome.browserless.io/screenshot?token='.env('BROWSERLESS_API'), [
+        $res = $client->request('POST', 'https://chrome.browserless.io/screenshot?token='.env('BROWSERLESS_API').'&url='.$url, [
         'headers' => [
             'Cache-Control' => 'no-cache',
         'Content-Type' => 'application/json',
         ],
-        'form_params' => [
-        // 'options' => $options,
+        /*'form_params' => [
+            'options' => $options,
         'url' => $url
-        ]
+        ] */
         ]);
         // echo $res->getStatusCode();
         // 200
