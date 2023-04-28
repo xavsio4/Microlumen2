@@ -457,10 +457,10 @@ class UrlController extends Controller
     "clip" => [
       "height" => 400,
       "width" => 800,
-    //  "x": 90,
-    //  "y": 100
+      "x"=> 90,
+      "y"=> 100
     ],
-    "fullPage"=> false,
+    "fullPage"=> true,
 ];
          $client = new \GuzzleHttp\Client();
         $res = $client->request('POST', 'https://chrome.browserless.io/screenshot?token='.env('BROWSERLESS_API'), [
