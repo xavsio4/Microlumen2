@@ -271,21 +271,33 @@ class UrlController extends Controller
             // 'metaProperties' => $metaProperties,
             );
         }
+
+         $options =  [
+    "type" =>"jpeg",
+    "clip" => [
+      "height" => 400,
+      "width" => 800,
+      "x"=> 90,
+      "y"=> 100
+    ],
+   // "fullPage"=> true,
+];
         
-        if (($result == false) || empty($result))
+      /*  if (($result == false) || empty($result))
         {
             
-            $client = new \GuzzleHttp\Client();
-            $res = $client->request('POST', 'https://api.peekalink.io/', [
-            'headers' => [
-            'Content-Type' => 'application/x-www-form-urlencoded',
-            'X-Api-Key' => env('PEEKALINK_API')
-            ],
-            'form_params' => [
-            // 'api_key' => env('PEEKALINK_API'),
-            'link' => $url
-            ]
-            ]);
+           
+             $client = new \GuzzleHttp\Client();
+        $res = $client->request('POST', 'https://chrome.browserless.io/screenshot?token='.env('BROWSERLESS_API'), [
+        'headers' => [
+            'Cache-Control' => 'no-cache',
+        'Content-Type' => 'application/json',
+        ],
+        'json' => [ 
+            'url' => $url,
+            'options' => $options,
+        ] 
+        ]);
             // echo $res->getStatusCode();
             // 200
             $jsonpeek = json_decode($res->getBody(), true);
@@ -297,7 +309,7 @@ class UrlController extends Controller
             // 'metaProperties' => $metaProperties,
             );
             
-        }
+        } */
         
         // return $result;
         
@@ -453,7 +465,8 @@ class UrlController extends Controller
         ]);
         $url = $request->input('url');
         $options =  [
-    "type" =>"jpeg",
+    "type" =>"png",
+    "encoding"=> "binary",
     "clip" => [
       "height" => 400,
       "width" => 800,
