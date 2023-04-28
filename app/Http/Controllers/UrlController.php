@@ -449,7 +449,7 @@ class UrlController extends Controller
     public function screenshot(request $request)
     {
         $url = $request->input('url');
-        $options =  {
+        $options =  '{
     "type": "jpeg",
     "clip": {
       "height": 400,
@@ -459,17 +459,16 @@ class UrlController extends Controller
     },
     "fullPage": false,
     "encoding": "binary"
-  };
+  }';
          $client = new \GuzzleHttp\Client();
-        $res = $client->request('POST', 'https://chrome.browserless.io/screenshot?token=', [
+        $res = $client->request('POST', 'https://chrome.browserless.io/screenshot?token='.env('BROWSERLESS_API'), [
         'headers' => [
             'Cache-Control' => 'no-cache',
         'Content-Type' => 'application/json',
-        'X-Api-Key' => env('PEEKALINK_API')
         ],
         'form_params' => [
-        // 'api_key' => env('PEEKALINK_API'),
-        'link' => $url
+         'options' => $options,
+        'url' => $url
         ]
         ]);
         // echo $res->getStatusCode();
