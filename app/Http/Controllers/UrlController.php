@@ -471,7 +471,7 @@ class UrlController extends Controller
         ],
         'json' => [ 
             'url' => $url,
-            'options' => $options,
+           // 'options' => $options,
         ] 
         ]);
         // echo $res->getStatusCode();
