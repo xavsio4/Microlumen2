@@ -469,11 +469,10 @@ class UrlController extends Controller
             'Cache-Control' => 'no-cache',
         'Content-Type' => 'application/json',
         ],
-        'context' => ["url"=>$url],
-        /*'form_params' => [
+        'json' => [ 
+            'url' => $url,
             'options' => $options,
-        'url' => $url
-        ] */
+        ] 
         ]);
         // echo $res->getStatusCode();
         // 200
