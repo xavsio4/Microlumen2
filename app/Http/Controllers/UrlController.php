@@ -464,11 +464,12 @@ class UrlController extends Controller
     "encoding": "binary"
   }';
          $client = new \GuzzleHttp\Client();
-        $res = $client->request('POST', 'https://chrome.browserless.io/screenshot?token='.env('BROWSERLESS_API').'&url='.$url, [
+        $res = $client->request('POST', 'https://chrome.browserless.io/screenshot?token='.env('BROWSERLESS_API'), [
         'headers' => [
             'Cache-Control' => 'no-cache',
         'Content-Type' => 'application/json',
         ],
+        'context' => ["url"=>$url],
         /*'form_params' => [
             'options' => $options,
         'url' => $url
