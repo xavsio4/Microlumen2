@@ -467,12 +467,12 @@ class UrlController extends Controller
         $options =  [
     "type" =>"png",
     "encoding"=> "base64",
-    "clip" => [
+   /* "clip" => [
       "height" => 400,
       "width" => 800,
       "x"=> 1,
       "y"=> 1
-    ],
+    ],*/
    // "fullPage"=> true,
 ];
          $client = new \GuzzleHttp\Client();
