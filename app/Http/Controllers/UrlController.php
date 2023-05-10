@@ -470,8 +470,8 @@ class UrlController extends Controller
     "clip" => [
       "height" => 400,
       "width" => 800,
-      "x"=> 90,
-      "y"=> 100
+      "x"=> 1,
+      "y"=> 1
     ],
    // "fullPage"=> true,
 ];
