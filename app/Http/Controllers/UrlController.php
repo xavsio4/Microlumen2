@@ -466,7 +466,7 @@ class UrlController extends Controller
         $url = $request->input('url');
         $options =  [
     "type" =>"png",
-    "encoding"=> "binary",
+    "encoding"=> "base64",
     "clip" => [
       "height" => 400,
       "width" => 800,
